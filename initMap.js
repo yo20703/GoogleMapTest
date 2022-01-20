@@ -1,5 +1,13 @@
 var map;
 var markers = [];
+
+
+function go() {
+  for (var i = 0; i < 5; i++) {
+    addMarker(i);
+  }
+}
+
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 17,
@@ -8,12 +16,7 @@ function initMap() {
       lng: 121.5643673
     }
   });
-}
-
-function go() {
-  for (var i = 0; i < 5; i++) {
-    addMarker(i);
-  }
+  go();
 }
 
 function addMarker(e) {
@@ -44,9 +47,6 @@ function addMarker(e) {
     }));
   }, e * 150);
 }
-
-go();
-
 
 var position = [
   {label:'A', lat:25.0336962, lng:121.5643673},
