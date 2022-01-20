@@ -3,7 +3,7 @@ var markers = [];
 
 
 function go() {
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < position.length; i++) {
     addMarker(i);
   }
 }
@@ -20,32 +20,28 @@ function initMap() {
 }
 
 function addMarker(e) {
-  setTimeout(function() {
-    let infowindow = new google.maps.InfoWindow({
-      content: 'test123' 
+  const infowindow = new google.maps.InfoWindow({
+    content: 'test123',
+  });
+  const marker = new google.maps.Marker({
+    position: {
+      lat: position[e].lat,
+      lng: position[e].lng
+    },
+    map: this.map,
+    icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 10
+        },
     });
 
-    markers.push(new google.maps.Marker({
-      position: {
-        lat: position[e].lat,
-        lng: position[e].lng
-      },
-
+  marker.addListener("click", () => {
+    infowindow.open({
+      anchor: marker,
       map: this.map,
-      icon: {
-        path: google.maps.SymbolPath.CIRCLE,
-        scale: 10
-      },
-      draggable: false,
-      //label: position[e].label,
-    }).addListener("click", e => {
-      infowindow.open({
-        anchor: this,
-        map,
-        shouldFocus: false,
-      });
-    }));
-  }, e * 150);
+      shouldFocus: false,
+    });
+  });
 }
 
 var position = [
